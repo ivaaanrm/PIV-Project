@@ -5,7 +5,7 @@ function [cb_masked, cr_masked] = masked_hist_2D(name)
     mask_path = "Dataset/Training-Dataset/Masks-Ideal/" + name + ".bmp";
     mask_inv = imread(mask_path);
     img = imread(img_path);
-
+    
 %     invertimos la máscara y 
 %     transformamos los valores de la máscara de logical a uint
     mask = imcomplement(mask_inv);
@@ -28,10 +28,13 @@ function [cb_masked, cr_masked] = masked_hist_2D(name)
     % Filtramos cada canal con la máscara
     cb_masked = cb_arr .* mask_arr;
     cr_masked = cr_arr .* mask_arr;
-
-    % Mostramos le histograma 2D de los canalese cb y cr
-    % figure
-    % histogram2(cb_arr, cr_arr, 'FaceColor', 'flat');
-    % title('cb-cr Histogram'), ylabel('cr'), xlabel('cb'),xlim([100, 160]);
-    end
+    
+    % elimnamos los pixeles con valor 0
+    cb_masked(cb_masked==0)=[];
+    cr_masked(cr_masked==0)=[];
+    
+    % array transpose
+    cb_masked = cb_masked.';
+    cr_masked = cr_masked.';
+    end 
 

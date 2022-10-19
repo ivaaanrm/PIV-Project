@@ -1,11 +1,21 @@
-function plot_2D_hist(name, cr_masked, cb_masked)
-    img_path = "Dataset/Training-Dataset/Images/" + name + ".jpg";
+function plot_2D_hist(cr_masked, cb_masked)
    
 % Mostramos el histograma 2D de los canales cb y cr filtrados
-%     figure
+%     img_path = "Dataset/Training-Dataset/Images/" + name + ".jpg";
 %     subplot(1,2,1)
-%     imshow(img_path)
+%     img = imread(img_path);
+%     ycbcr_img = rgb2ycbcr(img);
+%     imshow(ycbcr_img)
+%     title(['Image %s', name])
+    
+
+    [N_cb,edges_cb] = histcounts(cb_masked);
+    [N_cr,edges_cr] = histcounts(cr_masked);
+    
 %     subplot(1,2,2)
-    histogram2(cb_masked, cr_masked, 'FaceColor', 'flat');
-    title('cb-cr masked Histogram'), ylabel('cr'), xlabel('cb'), xlim([80, 150]), ylim([100,180]); 
+    figure
+    hist3([cb_masked, cr_masked],{0:3:max(edges_cb) 0:3:max(edges_cr)}, 'CdataMode','auto','FaceColor','interp')
+    title('cb-cr masked Histogram'), ylabel('cr'), xlabel('cb'),
+    xlim([min(edges_cb) max(edges_cb)])
+    ylim([min(edges_cr) max(edges_cr)])
 end
