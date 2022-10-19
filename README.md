@@ -1,6 +1,6 @@
 # PIV-Project
 
-## Sistema 1: Sistema de detección de piel
+## Sistema 1: Sistema de detección de piel
 
 <img src="/sources/img.png" alt="Alt text" title="Target">
 
