@@ -1,35 +1,40 @@
 clear all
-close all
 
-name = '0_A_hgr2B_id01_1';
-img_path = "Dataset/Training-Dataset/Images/" + name + ".jpg";
+name = '0_A_hgr2B_id11_1';
+img_path = "Dataset/Validation-Dataset/Images/" + name + ".jpg";
+mask_path = "Dataset/Validation-Dataset/Masks-Ideal/" + name + ".bmp";
+out_mask = "Masks/" + name + ".bmp";
 
 img = imread(img_path);
+ideal_mask = imcomplement(imread(mask_path));
 
 yCbCr_img = rgb2ycbcr(img);
 
-[width, height, channels] = size(YCbCr_img);
+% Modelo con threshoolds
+BW_1 = threshoold_clasifier(yCbCr_img);
+% [BW_1,maskedRGBImage] = lab_clf(img);
 
-% y = yCbCr_img(:,:,1);
-% cb = yCbCr_img(:,:,2);
-% cr = yCbCr_img(:,:,3);
-
-cb_max = 149.00;
-cb_min = 136.00;
-cr_max = 110.00;
-cr_min = 122.00;
-
-BW = zeros(witdh,height,1);
-
-for c=1:width
-    for r=1:height
-        if ((yCbCr_img(r,c,2) >= cb_min) && (yCbCr_img(r,c,2) <= cb_max))
-            
-        end
-    end
-end
+imwrite(BW_1, out_mask, "bmp");
+% filtramos la imagen con la máscara
+BW_1 = uint8(BW_1);
+filtered_img_1 = yCbCr_img .* cat(3, BW_1, BW_1, BW_1);
 
 
+%BW_2 = lieneal_clasifier(filtered_img_1)
+
+
+% Algo 4
+% Generamos la confusion matrix
+[tp, tn, fn, fp, precision, recall] = metrics(logical(BW_1), ideal_mask);
+f1score = f1_score(precision, recall);
 
 figure
-imshow(BW)
+subplot(1,2,1)
+imshow(logical(BW_1))
+subplot(1,2,2)
+imshow(ideal_mask)
+
+% figure
+% imshow(filtered_img_1);
+% figure
+% imshow(yCbCr_img)
