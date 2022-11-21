@@ -7,7 +7,7 @@ function plot_2D_hist(cr_masked, cb_masked)
 %     ycbcr_img = rgb2ycbcr(img);
 %     imshow(ycbcr_img)
 %     title(['Image %s', name])
-    SALTO = 4;
+    SALTO = 1;
     [N_cb,edges_cb] = histcounts(cb_masked);
     [N_cr,edges_cr] = histcounts(cr_masked);
     

@@ -1,4 +1,6 @@
-function [BW] = threshoold_clasifier(yCbCr_img)
+function [BW] = threshoold_clasifier(img)
+
+    yCbCr_img = rgb2ycbcr(img);
     
 	[width, height, ~] = size(yCbCr_img);
 

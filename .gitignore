@@ -36,4 +36,5 @@ codegen/
 octave-workspace
 
 
-tests/
+tests/dataset
+worse_masks

@@ -18,15 +18,20 @@ L = imsegkmeans(single(X),2,'NumAttempts',2);
 rng(s);
 BW = L == 2;
 
-% Invert mask
-BW = imcomplement(BW);
 
-% Active contour
-iterations = 100;
-BW = activecontour(X, BW, iterations, 'Chan-Vese');
+properties = regionprops(BW, {'Area', 'Eccentricity', 'EquivDiameter', 'EulerNumber', 'MajorAxisLength', 'MinorAxisLength', 'Orientation', 'Perimeter'});
+area = properties.Area;
+[width, height, ~] = size(BW);
+Atot = width*height;
+th = area/Atot;
+
+if th > 0.4 || area < 200
+    BW = imcomplement(BW);
+end
 
 % Fill holes
 BW = imfill(BW, 'holes');
+
 
 % Create masked image.
 maskedImage = RGB;

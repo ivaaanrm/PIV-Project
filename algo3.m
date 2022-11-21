@@ -1,22 +1,25 @@
 clear all
-close all
 
-files = dir(['Dataset/Training-Dataset/Images/', '/*.jpg']);
+load svm_clf.mat
+% load SVM_clf
+
+files = dir(['Dataset/Validation-Dataset/Images/', '/*.jpg']);
 
 for i = 1 : length(files)
+    % Lectura de las máscaras
     img = imread(files(i).folder + "/" + files(i).name);
     imgName = files(i).name;
     imgName = strsplit(imgName, '.');
-
-    yCbCr_img = rgb2ycbcr(img);
+    
 
     % ************ MODELOS *********** %
-%   BW_pred = threshoold_clasifier(yCbCr_img);
-    [BW_pred,maskedRGBImage] = lab_clf(img);
-%     [BW_pred,maskedRGBImage] = yCrCb_clf(img);
-%     [BW_pred,maskedImage] = kmeans_clf(img);
+    [BW_pred1,maskedRGBImage] = binary_svm_clf(img, svm_clf);
+    [BW_pred,maskedRGBImage] = lab_clf(maskedRGBImage);
 
     % Guradmos la máscara
     out_mask = "Masks/" + imgName(1) + ".bmp";
     imwrite(BW_pred, out_mask , "bmp");
+    
 end
+
+
