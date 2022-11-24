@@ -39,3 +39,12 @@ octave-workspace
 tests/dataset
 worse_masks
 Dataset_cop
+Dataset
+codigo_prog01
+Utils
+
+*.zip
+
+Masks
+Training
+

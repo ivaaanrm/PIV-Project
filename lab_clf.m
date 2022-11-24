@@ -15,32 +15,6 @@ channel2Max = 23.583; %
 channel3Min = 2.5;
 channel3Max = 30.929; %antes 26
 
-% 0.89
-% Define thresholds for channel 1 based on histogram settings
-% channel1Min = 5.136; % antes 0
-% channel1Max = 80;
-% 
-% % Define thresholds for channel 2 based on histogram settings
-% channel2Min = 0.5; % antes 1
-% channel2Max = 23.583; % 
-% 
-% % Define thresholds for channel 3 based on histogram settings
-% channel3Min = 0.0;
-% channel3Max = 30.929; %antes 26
-
-% 0.91
-% % Define thresholds for channel 1 based on histogram settings
-% channel1Min = 13.136; % antes 0
-% channel1Max = 78.467;
-% 
-% % Define thresholds for channel 2 based on histogram settings
-% channel2Min = 0.665; % antes 1
-% channel2Max = 23.583; % 
-% 
-% % Define thresholds for channel 3 based on histogram settings
-% channel3Min = -4.617;
-% channel3Max = 30.929; %antes 26
-
 
 % Create mask based on chosen histogram thresholds
 sliderBW = (I(:,:,1) >= channel1Min ) & (I(:,:,1) <= channel1Max) & ...
@@ -50,7 +24,6 @@ BW = sliderBW;
 
 % Fill holes
 BW = imfill(BW, 'holes');
-
 
 % Initialize output masked image based on input image.
 maskedRGBImage = RGB;

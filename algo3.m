@@ -1,7 +1,6 @@
 clear all
 
 load svm_clf.mat
-% load SVM_clf
 
 files = dir(['Dataset/Validation-Dataset/Images/', '/*.jpg']);
 
