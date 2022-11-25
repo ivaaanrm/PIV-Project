@@ -12,7 +12,7 @@ for i = 1 : length(files)
     imgName = files(i).name;
     imgName = strsplit(imgName, '.');   
     pred_mask_path = "Masks/" + imgName(1) + ".bmp";
-    ideal_mask_path = "Dataset/Validation-Dataset/Masks-Ideal/" + imgName(1) + ".bmp";
+    ideal_mask_path = "Dataset/Training-Dataset/Masks-Ideal/" + imgName(1) + ".bmp";
     
     % Lectura de las máscaraas
     pred_mask = imread(pred_mask_path);
@@ -28,5 +28,5 @@ end
 % Calculo del F1 Score total
 precision = tp_/(tp_+fp_);
 recall = tp_/(tp_+fn_);
-F1score_total = f1_score(precision, recall);
+F1score_total = (2*precision*recall)/(precision+recall);
 F1score_total

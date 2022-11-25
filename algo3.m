@@ -2,7 +2,7 @@ clear all
 
 load svm_clf.mat
 
-files = dir(['Dataset/Validation-Dataset/Images/', '/*.jpg']);
+files = dir(['Dataset/Training-Dataset/Images/', '/*.jpg']);
 
 for i = 1 : length(files)
     % Lectura de las máscaras

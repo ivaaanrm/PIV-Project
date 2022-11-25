@@ -18,11 +18,15 @@ for i = 1 : length(files)
         ideal_mask_path = "Dataset_cop/Training-Dataset/Masks-Ideal/" + imgName(1) + ".bmp";
         ideal_mask = imcomplement(imread(ideal_mask_path));
         
+        % diezmado de la imagen
         [width, height, ~] = size(img);
         DIEZMADO = 10;
         img = imresize(img,[width/DIEZMADO,height/DIEZMADO],'Method','bilinear');
         ideal_mask = imresize(ideal_mask,[width/DIEZMADO,height/DIEZMADO],'Method','bilinear');
-            
+        
+        % Devuelve las componentes L a b d ela imagen. último argumento:
+        % true -> solo componentes correspondientes a piel
+        % false -> componentes de toda la imagen 
         [L, a, b] = calc_hist_2D(img, ideal_mask, true);
 
         % Concatenamos los pixeles de piel de cada imagen con su array de
@@ -33,10 +37,10 @@ for i = 1 : length(files)
 end
 
 
+% PLot del histograma 2D
 SALTO = 1;
 [N_cb,edges_cb] = histcounts(a_arr);
 [N_cr,edges_cr] = histcounts(b_arr);
-
 
 figure
 hist3([a_arr, b_arr],{min(edges_cb):SALTO:max(edges_cb) min(edges_cr):SALTO:max(edges_cr)}, 'CdataMode','auto','FaceColor','interp')
@@ -44,11 +48,11 @@ title('A-B chrominance histogram'), ylabel('B'), xlabel('A'),
 xlim([min(edges_cb) max(edges_cb)])
 ylim([min(edges_cr) max(edges_cr)])
 
-xline(1.99,'-r','A_(min)');
-xline(23.583,'-r','A_(max)');
-
-yline(-4.617,'-r','B_min');
-yline(30.929,'-r','B_max');
+% xline(1.99,'-r','A_(min)');
+% xline(23.583,'-r','A_(max)');
+% 
+% yline(-4.617,'-r','B_min');
+% yline(30.929,'-r','B_max');
 
 figure()
 subplot(3,1,1)

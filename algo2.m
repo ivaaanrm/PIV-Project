@@ -3,7 +3,7 @@ clear all
 load svm_clf.mat
 
 % Importamos la imagen 
-name = '2_P_hgr1_id01_1';
+name = '5_A_hgr2B_id07_1';
 img_path = "Dataset/Training-Dataset/Images/" + name + ".jpg";
 mask_path = "Dataset/Training-Dataset/Masks-Ideal/" + name + ".bmp";
 img = imread(img_path);
@@ -22,8 +22,14 @@ ideal_mask = imcomplement(imread(mask_path));
 f1score = f1_score(precision, recall);
 
 figure
-subplot(1,2,1)
+title("Pipeline del modelo de clasificación")
+subplot(131)
+imshow(img)
+title("Imagen original")
+subplot(132)
+imshow((rgb2lab(img)))
+title("Transformación espacio de color LAB")
+subplot(133)
 imshow(logical(BW_pred))
-subplot(1,2,2)
-imshow(ideal_mask)
+title("Predicción de la máscara")
 
