@@ -69,25 +69,25 @@ plot(sv(:,1),sv(:,2),'ko','MarkerSize',10)
 legend('skin','background','Support Vector')
 hold off
 grid on
+%%
 
+% % Predict scores over the grid
+d = 0.02;
+[x1Grid,x2Grid] = meshgrid(min(X(:,1)):d:max(X(:,1)),...
+    min(X(:,2)):d:max(X(:,2)));
+xGrid = [x1Grid(:),x2Grid(:)];
+[~,scores] = predict(svm_clf,xGrid);
 
-% % % Predict scores over the grid
-% % d = 0.02;
-% [x1Grid,x2Grid] = meshgrid(min(X(:,1)):d:max(X(:,1)),...
-%     min(X(:,2)):d:max(X(:,2)));
-% xGrid = [x1Grid(:),x2Grid(:)];
-% [~,scores] = predict(svm_clf,xGrid);
-
-% Plot the data and the decision boundary
-% figure;
-% h(1:2) = gscatter(X(:,1),X(:,2),mask,'rb','.');
-% hold on
-% ezpolar(@(x)1);
-% h(3) = plot(X(svm_clf.IsSupportVector,1),X(svm_clf.IsSupportVector,2),'ko');
-% contour(x1Grid,x2Grid,reshape(scores(:,2),size(x1Grid)),[0 0],'k');
-% legend(h,{'-1','+1','Support Vectors'});
-% axis equal
-% hold off
+Plot the data and the decision boundary
+figure;
+h(1:2) = gscatter(X(:,1),X(:,2),mask,'rb','.');
+hold on
+ezpolar(@(x)1);
+h(3) = plot(X(svm_clf.IsSupportVector,1),X(svm_clf.IsSupportVector,2),'ko');
+contour(x1Grid,x2Grid,reshape(scores(:,2),size(x1Grid)),[0 0],'k');
+legend(h,{'-1','+1','Support Vectors'});
+axis equal
+hold off
 
 %% Validación del modelo con una imagen de test
 
