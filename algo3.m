@@ -14,10 +14,24 @@ for i = 1 : length(files)
     % ************ MODELOS *********** %
     [BW_pred1,maskedRGBImage] = binary_svm_clf(img, svm_clf);
     [BW_pred,maskedRGBImage] = lab_clf(maskedRGBImage);
+    
+    
+    [BW_edge] = postprocessmasks(img);
+    
+    mask = immultiply(BW_edge, BW_pred);
+    mask = bwareafilt(mask,1);
+    mask = imfill(mask, 'holes');
+    
+   [x,y] = size(mask);
+    area =x*y;
+    if bwarea(mask) > area*0.5
+        [mask] = postprocessmasks2(img, mask);
+    end
 
+    
     % Guradmos la máscara
     out_mask = "Masks/" + imgName(1) + ".bmp";
-    imwrite(BW_pred, out_mask , "bmp");
+    imwrite(mask, out_mask , "bmp");
     
 end
 
