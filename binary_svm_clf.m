@@ -17,14 +17,15 @@ function [BW,maskedRGBImage] = binary_svm_clf(img, model)
 %     cy = y_arr.';
     cb = cb_arr.';
     cr = cr_arr.';
-
+    
+    % Matriz con las características
     X_test = [double(cb),double(cr)];
-
+    
+    % predicción de la nueva máscara
     BW_pred = predict(model, X_test);
     
     % Reconstruir máscara
     [~, height, ~] = size(img);
-
     BW = logical(reshape(BW_pred,height,[]));
     BW = BW.';
     

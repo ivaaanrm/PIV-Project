@@ -4,16 +4,16 @@ function [BW,maskedRGBImage] = lab_clf(RGB)
 I = rgb2lab(RGB);
 
 % Define thresholds for channel 1 based on histogram settings
-channel1Min = 6.5; % antes 0
+channel1Min = 6.5; 
 channel1Max = 80;
 
 % Define thresholds for channel 2 based on histogram settings
-channel2Min = 3; % antes 1
-channel2Max = 23.583; % 
+channel2Min = 3; 
+channel2Max = 23.583; 
 
 % Define thresholds for channel 3 based on histogram settings
 channel3Min = 2.5;
-channel3Max = 30.929; %antes 26
+channel3Max = 30.929; 
 
 
 % Create mask based on chosen histogram thresholds

@@ -138,24 +138,7 @@ subplot(133)
 imshow(pred_mask)
 title("Estimación de la máscara")
 
-%%
-% % Predict scores over the grid
-% d = 0.02;
-% [x1Grid,x2Grid] = meshgrid(min(x_(:,1)):d:max(X(:,1)),...
-%     min(X(:,2)):d:max(X(:,2)));
-% xGrid = [x1Grid(:),x2Grid(:)];
-% [~,scores] = predict(cl,xGrid);
-% 
-% % Plot the data and the decision boundary
-% figure;
-% h(1:2) = gscatter(X(:,1),X(:,2),mask,'rb','.');
-% hold on
-% ezpolar(@(x)1);
-% h(3) = plot(X(cl.IsSupportVector,1),X(cl.IsSupportVector,2),'ko');
-% contour(x1Grid,x2Grid,reshape(scores(:,2),size(x1Grid)),[0 0],'k');
-% legend(h,{'-1','+1','Support Vectors'});
-% axis equal
-% hold off
+
 
 
 

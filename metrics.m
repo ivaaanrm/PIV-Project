@@ -25,12 +25,15 @@ function [tp, tn, fn, fp, precision, recall] = metrics(masked, ideal)
     
     mask_arr = reshape(masked.',1,[]);
     ideal_arr = reshape(ideal.',1,[]);
+    
+    % confussion matrix
     cm = confusionmat(mask_arr,ideal_arr);
     tp = cm(2,2);
     tn = cm(1,1);
     fn = cm(1,2);
     fp = cm(2,1);
     
+    % Calculo precision and recall
     precision = tp/(tp+fp);
     recall = tp/(tp+fn);
 

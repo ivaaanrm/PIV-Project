@@ -48,19 +48,20 @@ title('A-B chrominance histogram'), ylabel('B'), xlabel('A'),
 xlim([min(edges_cb) max(edges_cb)])
 ylim([min(edges_cr) max(edges_cr)])
 
-% xline(1.99,'-r','A_(min)');
-% xline(23.583,'-r','A_(max)');
-% 
-% yline(-4.617,'-r','B_min');
-% yline(30.929,'-r','B_max');
 
+% Plot component histograms
 figure()
 subplot(3,1,1)
 L_hist = histogram(L_arr);
+title("L component histogram")
+grid on
 subplot(3,1,2)
 A_hist = histogram(a_arr);
+title("A component histogram")
+grid on
 subplot(3,1,3)
 B_hist = histogram(b_arr);
+title("B component histogram")
 grid on
 
 
