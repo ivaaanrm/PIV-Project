@@ -33,10 +33,12 @@ decomposition = 0;
 se = strel('disk', radius, decomposition);
 fingersMask = imerode(fingersMask, se);
 
-% boundaries finger areas 
-B = bwboundaries(fingersMask);
+imwrite(fingersMask, "out.bmp" , "bmp");
 
-
+% Centroide del area
+centroid  = regionprops(BW).Centroid;
+% 
+B = bwboundaries(imread("out.bmp"),4,"noholes");
 d_ = [];
 dmax = 0;
 
