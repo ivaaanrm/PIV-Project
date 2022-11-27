@@ -15,6 +15,7 @@ centroid  = regionprops(BW).Centroid;
 [D,IDX] = bwdist(imcomplement(mask));
 mask_transform = repmat(rescale(D), [1 1 3]);
 
+% punto más alejado de los bordes (debería ser el centro de la palma)
 maximum = max(max(D));
 [y,x]=find(D==maximum);
 
