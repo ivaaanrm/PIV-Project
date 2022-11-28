@@ -31,7 +31,7 @@ mask = bwareafilt(mask,1);
     end
 
 % Guradmos la máscara
-out_mask = "Masks-contours/" + imgName(1) + ".bmp";
+out_mask =  imgName(1) + ".bmp";
 imwrite(mask, out_mask , "bmp");
 
 toc

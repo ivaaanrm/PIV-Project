@@ -2,7 +2,8 @@ clear all
 close all
 
 % Lectura de las máscaras
-mask = imread("Dataset/Training-Dataset/Masks-Ideal/4_P_hgr1_id05_1.bmp");
+mask = imread("Dataset/Training-Dataset/Masks-Ideal/4_P_hgr1_id02_1.bmp");
+
 mask = imcomplement(mask);
 
 
