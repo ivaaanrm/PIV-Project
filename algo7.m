@@ -1,6 +1,6 @@
 clear all
 
-files = dir(['Fingers/', '/*.txt']);
+files = dir(['Fingers_knn_single/', '/*.txt']);
 
 preds_ = [];
 refs_ = [];
@@ -16,7 +16,7 @@ for i = 1 : length(files)
     ref = str2num(['uint8(',ref{1},')']);
 
     % Leer el numero
-    path = "Fingers/"+imgName;
+    path = "Fingers_knn_single/"+imgName;
     fileID = fopen(path,'r');
     formatSpec = '%d';
     pred = fscanf(fileID,formatSpec);
@@ -27,7 +27,14 @@ for i = 1 : length(files)
 
     if pred == ref
         aciertos = aciertos + 1;
+    else
+        image = strsplit(imgName,'.');
+        name = "fingers_masks_val/"+ image(1) +".bmp";
+        figure
+        imshow(imread(name))
+        title(pred)
     end
+
     
 end
 
