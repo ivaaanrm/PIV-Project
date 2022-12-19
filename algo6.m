@@ -5,8 +5,8 @@ load trainedModel.mat
 load SVM_model.mat
 load KNN_model.mat
 
-%files = dir(['Dataset/Validation-Dataset/Masks-Ideal/', '/*.bmp']);
-files = dir(['Dataset/Training-Dataset/Masks-Ideal/', '/*.bmp']);
+files = dir(['Dataset/Validation-Dataset/Masks-Ideal/', '/*.bmp']);
+%files = dir(['Dataset/Training-Dataset/Masks-Ideal/', '/*.bmp']);
 
 for i = 1 : length(files)
     % Lectura de las máscaras
@@ -35,12 +35,12 @@ for i = 1 : length(files)
 %             pred = KNN_model.predictFcn(struct2table(stats(j)));        
             if pred>0
                 centroids_ = vertcat(centroids_,stats(j).Centroid);
-%                 if fingersMask(round(stats(j).Centroid(:,1))) == 0
-%                     pred=2;
-% 
-%                     mask_centroids = insertMarker(255*uint8(fingersMask), round(stats(j).Centroid), 'x', 'color', 'red', 'size', 20);
-%                     figure
-%                     imshow(mask_centroids)
+                if fingersMask(round(stats(j).Centroid(2)), round(stats(j).Centroid(1))) == 0
+                    pred=2;
+                    mask_centroids = insertMarker(255*uint8(fingersMask), round(stats(j).Centroid), 'x', 'color', 'red', 'size', 20);
+                    figure
+                    imshow(mask_centroids)
+                end
             end
            
             sumFingers = sumFingers+pred;
