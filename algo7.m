@@ -29,7 +29,7 @@ for i = 1 : length(files)
         aciertos = aciertos + 1;
     else
         image = strsplit(imgName,'.');
-        name = "fingers_masks_val/"+ image(1) +".bmp";
+        name = "fingers_masks_train/"+ image(1) +".bmp";
         figure
         imshow(imread(name))
         title(pred)
